@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Comment self destruct
 // @namespace    http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A
-// @version      1.0
+// @version      1.1
 // @description  Adds a button to allow you to self-destruct comments after a period of time
 // @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A)
 // @match        *://*.stackexchange.com/*
@@ -42,8 +42,19 @@ setTimeout(function() {
     $('.comment').each(function() {
         $that = $(this);
         if($that.find('.comment-user').text() == $('.topbar-links a span:eq(0)').text() || $that.find('.comment-user').text() == $('.topbar-links a .gravatar-wrapper-24').attr('title')) {
-            $that.find('.comment-date').after("<span id='"+$that.attr('id').split('-')[1]+"' class='self-destruct'>&nbsp;self-destruct</span>");
+            $that.find('.comment-date').after("<span id='"+$that.attr('id').split('-')[1]+"' class='self-destruct' style='cursor:pointer; color:blue'>&nbsp;self-destruct</span>");
         }
+    });
+    
+    $('.js-show-link.comments-link').click(function() { //Keep buttons when 'show x more comments' is clicked
+        setTimeout(function() {
+            $('.comment').each(function() {
+                $that = $(this);
+                if($that.find('.comment-user').text() == $('.topbar-links a span:eq(0)').text() || $that.find('.comment-user').text() == $('.topbar-links a .gravatar-wrapper-24').attr('title')) {
+                    $that.find('.comment-date').after("<span id='"+$that.attr('id').split('-')[1]+"' class='self-destruct' style='cursor:pointer; color:blue'>&nbsp;self-destruct</span>");
+                }
+            });
+        }, 1000);
     });
     
     $('.self-destruct').on('click', function() {
