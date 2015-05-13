@@ -75,10 +75,9 @@ function everyHour() {
     var mins = new Date().getMinutes();
     var times = JSON.parse(GM_getValue('commentSelfDestruct-timesIds'))
     if(mins == "00"){
-        console.log(times);
         $.each(times, function(id,time) {             
             if(new Date().getTime() > time) {
-                alert('deleting');
+                alert('Deleting comment #' + id);
                 console.log('Deleting comment #' + id);
                 $.ajax({
                     type: "POST",
