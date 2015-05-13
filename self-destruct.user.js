@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Comment self destruct
 // @namespace    http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A
-// @version      1.1
+// @version      1.2
 // @description  Adds a button to allow you to self-destruct comments after a period of time
 // @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A)
 // @match        *://*.stackexchange.com/*
@@ -13,10 +13,10 @@
 // @match        *://*.mathoverflow.net/*
 // @grant        GM_getValue
 // @grant        GM_setValue
-// @grant        GM_deleteValue
 // ==/UserScript==
 if (window.location.href.indexOf('/users/') > -1) { //Add the add features link
     $('.additional-links').append('<span class="lsep">|</span><a href="javascript:;" id="accessTokenLink">self-destruct access-token</a>');
+    $('.sub-header-links.fr').append('<span class="lsep">|</span><a href="javascript:;" id="accessTokenLink">self-destruct access-token</a>'); //Old profile (pre Feb-2015)
     $('#accessTokenLink').click(function() {
         var token = window.prompt('Please enter your access token:');
         if(token) {
@@ -64,6 +64,7 @@ setTimeout(function() {
             var date = new Date();
             times[id] = date.setDate(date.getDate() + parseInt(days));
             GM_setValue('commentSelfDestruct-timesIds', JSON.stringify(times));
+            console.log(times);
         }        
     });
     setInterval(everyHour, 1000);
@@ -74,8 +75,10 @@ function everyHour() {
     var mins = new Date().getMinutes();
     var times = JSON.parse(GM_getValue('commentSelfDestruct-timesIds'))
     if(mins == "00"){
+        console.log(times);
         $.each(times, function(id,time) {             
             if(new Date().getTime() > time) {
+                alert('deleting');
                 console.log('Deleting comment #' + id);
                 $.ajax({
                     type: "POST",
