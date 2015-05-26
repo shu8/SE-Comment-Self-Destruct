@@ -30,17 +30,8 @@
     <section class="main-content">
       <h3>
 <a id="your-access-token" class="anchor" href="#your-access-token" aria-hidden="true"><span class="octicon octicon-link"></span></a>Your access token:</h3>
-
-<p><script>getQueryVariable('access_token')</script><br>Please enter this by going to your profile and clicking 'self-destruct access-token' at the top :)</p>
-
-
-
-
-
-
-
-
-
+<span id='token'></span>
+<p><script>document.getElementById("token").innerHTML = getQueryVariable('access_token')</script><br>Please enter this by going to your profile and clicking 'self-destruct access-token' at the top :)</p>
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/shu8/SE-Comment-Self-Destruct">Se-comment-self-destruct</a> is maintained by <a href="https://github.com/shu8">shu8</a>.</span>
 
