@@ -42,7 +42,7 @@ setTimeout(function() {
 
     $('.comment').each(function() {
         $that = $(this);
-        if($that.find('.comment-user').text() == $('.topbar-links a span:eq(0)').text() || $that.find('.comment-user').text() == $('.topbar-links a .gravatar-wrapper-24').attr('title')) {
+        if($that.find('.comment-user').contents().get(0).nodeValue == $('.topbar-links a span:eq(0)').text() || $that.find('.comment-user').contents().get(0).nodeValue == $('.topbar-links a .gravatar-wrapper-24').attr('title')) {
             $that.find('.comment-date').after("<span id='"+$that.attr('id').split('-')[1]+"' class='self-destruct' style='cursor:pointer; color:blue'>&nbsp;self-destruct</span>");
         }
     });
@@ -51,7 +51,7 @@ setTimeout(function() {
         setTimeout(function() {
             $('.comment').each(function() {
                 $that = $(this);
-                if($that.find('.comment-user').text() == $('.topbar-links a span:eq(0)').text() || $that.find('.comment-user').text() == $('.topbar-links a .gravatar-wrapper-24').attr('title')) {
+                if($that.find('.comment-user').contents().get(0).nodeValue == $('.topbar-links a span:eq(0)').text() || $that.find('.comment-user').contents().get(0).nodeValue == $('.topbar-links a .gravatar-wrapper-24').attr('title')) {
                     $that.find('.comment-date').after("<span id='"+$that.attr('id').split('-')[1]+"' class='self-destruct' style='cursor:pointer; color:blue'>&nbsp;self-destruct</span>");
                 }
             });
